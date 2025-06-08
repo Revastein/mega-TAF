@@ -1,4 +1,4 @@
-# :godmode: mega-TAF 
+# mega-TAF :godmode:
 
 > UI-фреймворк на **Python 3.13 · PyTest · Selenium · Allure**
 
