@@ -4,6 +4,8 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 
+from helpers.exceptions import ElementNotFoundAssertion
+
 DEFAULT_TIMEOUT = 10
 
 
@@ -14,11 +16,11 @@ class WaitUntil(WebDriverWait):
     def safe_until(self, condition: Callable, message: str | None = None) -> Any:
         try:
             return self.until(condition, message=message)
-        except TimeoutException:
-            return False
+        except TimeoutException as exc:
+            raise ElementNotFoundAssertion(message or str(exc)) from None
 
     def safe_until_not(self, condition: Callable, message: str | None = None) -> Any:
         try:
             return self.until_not(condition, message=message)
-        except TimeoutException:
-            return False
+        except TimeoutException as exc:
+            raise ElementNotFoundAssertion(message or str(exc)) from None
