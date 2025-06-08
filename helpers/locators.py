@@ -11,9 +11,8 @@ class LocatorWrapper:
         self.by = by
         self.locator = locator
 
-    def find(self, wait=None):
-        wait = wait or WaitUntil(self.driver)
-        return wait.safe_until(
+    def find(self):
+        return WaitUntil(self.driver).safe_until(
             ex_con.visibility_of_element_located((self.by, self.locator)),
             message=f"Can't find element by {self.by}='{self.locator}'",
         )
