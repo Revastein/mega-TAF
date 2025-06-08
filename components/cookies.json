@@ -1,0 +1,9 @@
+{
+  "name": "cookiesPolicy",
+  "value": "1",
+  "domain": "mega.readyscript.ru",
+  "path": "/",
+  "secure": false,
+  "httpOnly": false,
+  "sameSite": "Lax"
+}
