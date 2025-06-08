@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 from base.site_entry import Site
 from components.config import chrome_options
+from helpers.allure import attach_screenshot
 
 load_dotenv()
 
@@ -54,3 +55,12 @@ def chrome_driver(request):
 @pytest.fixture
 def site(chrome_driver):
     return Site(chrome_driver)
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    rep = outcome.get_result()
+
+    if rep.when == "call" and rep.failed:
+        attach_screenshot(item.funcargs.get("chrome_driver"), name="failure-screenshot")
