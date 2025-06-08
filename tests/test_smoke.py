@@ -114,7 +114,9 @@ class TestShoppingFlow:
                 1,
             )
 
-        with site.cart_page.expected.step("Удаление добавленного продукта через крестик"):
+        with site.cart_page.expected.step(
+            "Удаление добавленного продукта через крестик"
+        ):
             site.cart_page.remove_button.click()
             site.cart_page.expected.wait_for(
                 lambda: len(site.cart_page.added_items.find_all()) == 0,
