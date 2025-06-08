@@ -1,5 +1,3 @@
-import re
-
 from base.base_page import BasePage
 from components.config import CART_PAGE_URL
 from helpers.locators import BaseLocator
