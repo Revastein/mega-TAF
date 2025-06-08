@@ -1,5 +1,8 @@
 # mega-TAF :godmode:
 
+[![UI tests](https://github.com/Revastein/mega-TAF/actions/workflows/ui-tests.yml/badge.svg)](https://github.com/Revastein/mega-TAF/actions/workflows/ui-tests.yml)
+[![Allure](https://img.shields.io/static/v1?label=allure&message=report&color=pink)](https://revastein.github.io/mega-TAF/)
+
 > UI-фреймворк на **Python 3.13 · PyTest · Selenium · Allure**
 
 Тестируем четыре ключевых сценария <https://mega.readyscript.ru>
