@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/taf/helpers/expected.py", line 31, in step
+    raise AssertionError(msg)
+AssertionError: Timeout 10s waiting for condition
