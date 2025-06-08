@@ -30,7 +30,7 @@ class TestShoppingFlow:
         site.main_page.login_form.submit_button.click()
 
         with site.main_page.expected.step(
-            "Пользователь должен залогиниться как Ivan Ivanov"
+            "Пользователь должен залогиниться как May May или Ivan Ivanov"
         ):
             site.main_page.expected.wait_for(
                 lambda: any(
@@ -104,17 +104,17 @@ class TestShoppingFlow:
             actual_title = site.cart_page.product_titles.text()
             site.cart_page.expected.is_equal(actual_title, chosen_title)
 
-        with site.cart_page.expected.step("В корзине ровно один реальный товар"):
+        with site.cart_page.expected.step("В корзине конкретный добавленный продукт"):
             real_count = len(site.cart_page.added_items.find_all())
             site.cart_page.expected.is_equal(real_count, 1)
 
-        with site.cart_page.expected.step("Количество добавленного товара равно 1"):
+        with site.cart_page.expected.step("Количество добавленного продукта равно 1"):
             site.cart_page.expected.is_equal(
                 site.cart_page.product_count.int_value(),
                 1,
             )
 
-        with site.cart_page.expected.step("Удаление добавленного товара через крестик"):
+        with site.cart_page.expected.step("Удаление добавленного продукта через крестик"):
             site.cart_page.remove_button.click()
             site.cart_page.expected.wait_for(
                 lambda: len(site.cart_page.added_items.find_all()) == 0,
@@ -123,7 +123,7 @@ class TestShoppingFlow:
 
 
 class TestFavouriteFlow:
-    def test_add_to_favourite(self, site: Site):
+    def test_add_and_remove_item_from_favourite(self, site: Site):
         allure_description(
             test_case_title="Избранное: добавить и удалить товар",
             steps=[
@@ -166,7 +166,7 @@ class TestFavouriteFlow:
             site.favorite_page.expected.is_equal(actual_title, chosen_product_title)
 
         with site.favorite_page.expected.step(
-            "Удаление добавленного товара через крестик"
+            "Удаление добавленного продукта из избранного"
         ):
             site.favorite_page.remove_from_favorite.click()
             site.favorite_page.expected.wait_for(
