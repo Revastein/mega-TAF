@@ -8,14 +8,6 @@ def allure_description(
     steps: Iterable[dict[str, str | list[str] | None]],
     preconditions: Iterable[str] | None = None,
 ):
-    """
-    Generate default HTML report for a test case description
-
-    :param test_case_title: Title
-    :param steps: List of steps (dict), where each step has a required key "action"
-       and an optional key "expected" (string or list of strings).
-    :param preconditions: List of preconditions, if any
-    """
     new_line = "<p></p>"
     html_parts = [f"{test_case_title}{new_line}"]
 
@@ -46,3 +38,8 @@ def allure_description(
 
     description = "".join(html_parts)
     allure.dynamic.description_html(description)
+
+
+def attach_screenshot(driver, name):
+    png = driver.get_screenshot_as_png()
+    allure.attach(png, name=name, attachment_type=allure.attachment_type.PNG)
