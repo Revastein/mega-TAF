@@ -2,6 +2,8 @@ import traceback
 from contextlib import contextmanager
 from typing import Any, Callable
 
+from helpers.allure import attach_screenshot
+
 import allure
 
 
@@ -25,11 +27,11 @@ class Expected:
                         else self.error_msg or "Condition failed"
                     )
                     if self.include_screenshot:
-                        self.attach_screenshot("Failure screenshot")
+                        attach_screenshot(self.driver, "Failure screenshot")
                     raise AssertionError(msg)
-        except Exception as exc:
+        except Exception:
             if self.include_screenshot:
-                self.attach_screenshot("Exception screenshot")
+                attach_screenshot(self.driver, "Exception screenshot")
             tb = traceback.format_exc()
             allure.attach(
                 tb, name="Traceback", attachment_type=allure.attachment_type.TEXT
@@ -52,7 +54,3 @@ class Expected:
             sleep(poll)
         self.condition = lambda: False
         self.error_msg = f"Timeout {timeout}s waiting for condition"
-
-    def attach_screenshot(self, name):
-        png = self.driver.get_screenshot_as_png()
-        allure.attach(png, name=name, attachment_type=allure.attachment_type.PNG)
